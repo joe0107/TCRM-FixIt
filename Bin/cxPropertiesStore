@@ -1,0 +1,162 @@
+﻿[Main]
+Version=2
+
+[BarEditItem_IPHE001: TcxPropertiesStoreComponent]
+=
+EditValue="3910864"
+
+[CheckBox_IPH2001_UpdMode: TcxPropertiesStoreComponent]
+=
+SourceDPI=96
+Checked="False"
+
+[ComboBox_ChkCtKind: TcxPropertiesStoreComponent]
+=
+SourceDPI=96
+Text=""銝?祈?蝝?"
+
+[cxBarEditItem_01: TcxPropertiesStoreComponent]
+=
+EditValue="True"
+
+[cxBarEditItem_02: TcxPropertiesStoreComponent]
+=
+EditValue="True"
+
+[cxBarEditItem_03: TcxPropertiesStoreComponent]
+=
+EditValue="False"
+
+[cxBarEditItem_04: TcxPropertiesStoreComponent]
+=
+EditValue="False"
+
+[cxBarEditItem_05: TcxPropertiesStoreComponent]
+=
+EditValue="True"
+
+[cxBarEditItem_06: TcxPropertiesStoreComponent]
+=
+EditValue="True"
+
+[cxBarEditItem_07: TcxPropertiesStoreComponent]
+=
+EditValue="True"
+
+[cxBarEditItem_08: TcxPropertiesStoreComponent]
+=
+EditValue="True"
+
+[cxBarEditItem_09: TcxPropertiesStoreComponent]
+=
+EditValue="False"
+
+[cxMemo_SQL: TcxPropertiesStoreComponent]
+=
+SourceDPI=96
+
+[cxMemo_SQL/Lines: TMemoStrings]
+=
+
+[cxPageControl_Cust: TcxPropertiesStoreComponent]
+=
+SourceDPI=96
+ActivePage="cxTabShtWD3CH01A"
+
+[cxPageCtrlWMIS: TcxPropertiesStoreComponent]
+=
+SourceDPI=96
+ActivePage="cxTabSheet_WD2DTCU"
+
+[cxTabSht_Tools: TcxPropertiesStoreComponent]
+=
+SourceDPI=96
+ActivePage="TabSheet_CustFlag"
+
+[cxTextEdit_SyncLog_PK: TcxPropertiesStoreComponent]
+=
+SourceDPI=96
+Text=""
+
+[cxTxtEdtChacNo: TcxPropertiesStoreComponent]
+=
+SourceDPI=96
+Text="0812264"
+
+[cxTxtEdtPK: TcxPropertiesStoreComponent]
+=
+SourceDPI=96
+Text="0812264"
+
+[DateEdit_ChkCt: TcxPropertiesStoreComponent]
+=
+SourceDPI=96
+Date=42517
+
+[DateEdit_UpdCustFlag1: TcxPropertiesStoreComponent]
+=
+SourceDPI=96
+Date=41699
+
+[DateEdit_UpdCustFlag2: TcxPropertiesStoreComponent]
+=
+SourceDPI=96
+Date=41729
+
+[dxBarComboBranch: TcxPropertiesStoreComponent]
+=
+ItemIndex=0
+
+[dxBarEditCustNo: TcxPropertiesStoreComponent]
+=
+Text="0902107"
+
+[fmMain: TcxPropertiesStoreComponent]
+=
+Height=737
+Left=295
+Top=105
+Width=1328
+
+[MRUEdit_CustNo: TcxPropertiesStoreComponent]
+=
+SourceDPI=96
+Text="0912046"
+
+[PageControl_CHAC: TcxPropertiesStoreComponent]
+=
+SourceDPI=96
+ActivePage="cxTabSht_CHAC"
+
+[PageControl_Main: TcxPropertiesStoreComponent]
+=
+SourceDPI=96
+ActivePage="TabSheet_Phone"
+
+[PageControl_Phone: TcxPropertiesStoreComponent]
+=
+SourceDPI=96
+ActivePage="TabSheet_PhoneIn"
+
+[RibbonTab_CustInfo: TcxPropertiesStoreComponent]
+=
+Active="False"
+
+[RibbonTab_Phone: TcxPropertiesStoreComponent]
+=
+Active="True"
+
+[RibbonTab_Tools: TcxPropertiesStoreComponent]
+=
+Active="False"
+
+[TextEdit_ChkCtCustNo: TcxPropertiesStoreComponent]
+=
+SourceDPI=96
+Text="1402768"
+
+[TextEdit_ChkCtFlag: TcxPropertiesStoreComponent]
+=
+SourceDPI=96
+Text="N"
+

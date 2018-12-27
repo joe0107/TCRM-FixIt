@@ -1,0 +1,736 @@
+unit dmInterbase;
+
+interface
+
+uses
+  SysUtils, Classes, UniProvider, DB, MemDS, DBAccess, Uni;
+
+type
+  TdmIB = class(TDataModule)
+    connMERP: TUniConnection;
+    qrTraceLog: TUniQuery;
+    qrWD3CH01A: TUniQuery;
+    qrWD2TITC: TUniQuery;
+    dsWD2TITC: TDataSource;
+    qrWD2TITCTITC001: TStringField;
+    qrWD2TITCTITC002: TStringField;
+    qrWD2TITCTITC003: TStringField;
+    qrWD2TITCTITC004: TStringField;
+    qrWD2TITCTITC005: TStringField;
+    qrWD2TITCTITC006: TStringField;
+    qrWD2TITCTITC007: TFloatField;
+    qrWD2TITCTITC008: TFloatField;
+    qrWD2TITCTITC009: TFloatField;
+    qrWD2TITCTITC010: TFloatField;
+    qrWD2TITCTITC011: TFloatField;
+    qrWD2TITCTITC012: TStringField;
+    qrWD2TITCTITC013: TStringField;
+    qrWD2TITCTITC014: TStringField;
+    qrWD2TITCTITC052: TFloatField;
+    qrWD2SHIO: TUniQuery;
+    dsWD2SHIO: TDataSource;
+    qrWD2SHIOSHIO001: TStringField;
+    qrWD2SHIOSHIO002: TStringField;
+    qrWD2SHIOSHIO003: TStringField;
+    qrWD2SHIOSHIO004: TStringField;
+    qrWD2SHIOSHIO005: TStringField;
+    qrWD2SHIOSHIO006: TStringField;
+    qrWD2SHIOSHIO007: TStringField;
+    qrWD2SHIOSHIO008: TStringField;
+    qrWD2SHIOSHIO009: TStringField;
+    qrWD2SHIOSHIO010: TStringField;
+    qrWD2SHIOSHIO011: TStringField;
+    qrWD2SHIOSHIO012: TStringField;
+    qrWD2SHIOSHIO013: TStringField;
+    qrWD2SHIOSHIO014: TStringField;
+    qrWD2SHIOSHIO015: TStringField;
+    qrWD2SHIOSHIO023: TStringField;
+    qrWD2SHIOSHIO024: TStringField;
+    qrWD2SHIOSHIO025: TStringField;
+    qrWD2SHIOSHIO028: TStringField;
+    qrWD2TITCTITC040: TStringField;
+    qrWD2SU01: TUniQuery;
+    dsWD2SU01: TDataSource;
+    qrWD2SU01SU01001: TStringField;
+    qrWD2SU01SU01002: TStringField;
+    qrWD2SU01SU01003: TStringField;
+    qrWD2SU01SU01004: TStringField;
+    qrWD2SU01SU01005: TStringField;
+    qrWD2SU01SU01006: TStringField;
+    qrWD2SU01SU01007: TStringField;
+    qrWD2SU01SU01008: TStringField;
+    qrWD2SU01SU01009: TStringField;
+    qrWD2SU01SU01010: TStringField;
+    qrWD2SU01SU01011: TStringField;
+    qrWD2SU01SU01012: TStringField;
+    qrWD2SU01SU01013: TStringField;
+    qrWD2SU01SU01014: TStringField;
+    qrWD2SU01SU01015: TStringField;
+    qrWD2SU01SU01016: TStringField;
+    qrWD2SU01SU01017: TStringField;
+    qrWD2SU01SU01018: TStringField;
+    qrWD2SU01SU01019: TStringField;
+    qrWD2SU01SU01020: TStringField;
+    qrWD2SU01SU01021: TStringField;
+    qrWD2SU01SU01022: TStringField;
+    qrWD2SU01SU01023: TStringField;
+    qrWD2SU01SU01024: TStringField;
+    qrWD2SU01SU01025: TFloatField;
+    qrWD2SU01SU01026: TStringField;
+    qrWD2SU01SU01027: TStringField;
+    qrWD2SU01SU01028: TFloatField;
+    qrWD2SU01SU01029: TStringField;
+    qrWD2SU01SU01030: TStringField;
+    qrWD2SU01SU01031: TStringField;
+    qrWD2SU01SU01032: TFloatField;
+    qrWD2SU01SU01033: TFloatField;
+    qrWD2SU01SU01034: TFloatField;
+    qrWD2SU01SU01035: TFloatField;
+    qrWD2SU01SU01036: TFloatField;
+    qrWD2SU01SU01037: TFloatField;
+    qrWD2SU01SU01038: TStringField;
+    qrWD2SU01SU01039: TStringField;
+    qrWD2SU01SU01040: TStringField;
+    qrWD2SU01SU01041: TStringField;
+    qrWD2SU01SU01042: TStringField;
+    qrWD2SU01SU01043: TFloatField;
+    qrWD2SU01SU01044: TFloatField;
+    qrWD2SU01SU01045: TFloatField;
+    qrWD2SU01SU01046: TFloatField;
+    qrWD2SU01SU01047: TFloatField;
+    qrWD2SU01SU01048: TFloatField;
+    qrWD2SU01SU01049: TFloatField;
+    qrWD2SU01SU01050: TFloatField;
+    qrWD2SU01SU01051: TFloatField;
+    qrWD2SU01SU01052: TFloatField;
+    qrWD2SU01SU01053: TFloatField;
+    qrWD2SU01SU01054: TFloatField;
+    qrWD2SU01SU01055: TStringField;
+    qrWD2SU01SU01056: TStringField;
+    qrWD2SU01SU01057: TStringField;
+    qrWD2SU01SU01058: TStringField;
+    qrWD2SU01SU01059: TDateTimeField;
+    qrWD2SU01SU01060: TDateTimeField;
+    qrWD2SU01SU01061: TStringField;
+    qrWD2SU01SU01062: TStringField;
+    qrWD2SU01SU01063: TStringField;
+    qrWD2SU01SU01064: TStringField;
+    qrWD2SU01SU01065: TStringField;
+    qrWD2SU01SU01066: TStringField;
+    qrWD2SU01SU01067: TStringField;
+    qrWD2SU01SU01068: TStringField;
+    qrWD2SU01SU01069: TStringField;
+    qrWD2SU01SU01070: TStringField;
+    qrWD2SU01SU01071: TStringField;
+    qrWD2SU01SU01072: TStringField;
+    qrWD2SU01SU01073: TFloatField;
+    qrWD2SU01SU01074: TFloatField;
+    qrWD2SU01SU01075: TFloatField;
+    qrWD2SU01SU01076: TFloatField;
+    qrWD2SU01SU01077: TFloatField;
+    qrWD2SU01SU01078: TFloatField;
+    qrWD2SU01SU01079: TFloatField;
+    qrWD2SU01SU01080: TStringField;
+    qrWD2SU01SU01081: TStringField;
+    qrWD2SU01SU01082: TStringField;
+    qrWD2SU01SU01083: TStringField;
+    qrWD2SU01SU01084: TStringField;
+    qrWD2SU01SU01085: TStringField;
+    qrWD2SU01SU01086: TStringField;
+    qrWD2SU01SU01087: TStringField;
+    qrWD2SU01SU01088: TDateTimeField;
+    qrWD2SU01SU01089: TFloatField;
+    qrWD2SU01SU01090: TFloatField;
+    qrWD2SU01SU01091: TStringField;
+    qrWD2SU01SU01092: TStringField;
+    qrWD2SU01SU01093: TStringField;
+    qrWD2SU01SU01094: TStringField;
+    qrWD2SU01SU01095: TStringField;
+    qrWD2SU01SU01096: TStringField;
+    qrWD2SU01SU01097: TStringField;
+    qrWD2SU01SU01098: TFloatField;
+    qrWD2SU01SU01099: TStringField;
+    qrWD2SU01SU01100: TStringField;
+    qrWD2SU01SU01101: TStringField;
+    qrWD2SU01SU01102: TStringField;
+    qrWD2SU01SU01103: TStringField;
+    qrWD2SU01SU01104: TStringField;
+    qrWD2SU01SU01105: TStringField;
+    qrWD2SU01SU01106: TStringField;
+    qrWD2SU01SU01801: TStringField;
+    qrWD2SU01SU01802: TStringField;
+    qrWD2SU01SU01803: TStringField;
+    qrWD2SU01SU01804: TStringField;
+    qrWD2SU01SU01805: TStringField;
+    qrWD2SU01SU01806: TFloatField;
+    qrWD2SU01SU01807: TFloatField;
+    qrWD2SU01SU01808: TFloatField;
+    qrWD2SU01SU01809: TDateTimeField;
+    qrWD2SU01SU01810: TDateTimeField;
+    qrWD2SU01SU01811: TFloatField;
+    qrWD2SU01SU01812: TFloatField;
+    qrWD4MF10A: TUniQuery;
+    dsWD4MF10A: TDataSource;
+    qrWD4MF10AMF10001: TStringField;
+    qrWD4MF10AMF10002: TStringField;
+    qrWD4MF10AMF10003: TStringField;
+    qrWD4MF10AMF10005: TStringField;
+    qrWD4MF10AMF10006: TStringField;
+    qrWD4MF10AMF10007: TStringField;
+    qrWD4MF10AMF10008: TStringField;
+    qrWD4MF10AMF10009: TStringField;
+    qrWD4MF10AMF10010: TStringField;
+    qrWD4MF10AMF10011: TStringField;
+    qrWD4MF10AMF10012: TStringField;
+    qrWD4MF10AMF10013: TStringField;
+    qrWD4MF10AMF10014: TFloatField;
+    qrWD4MF10AMF10015: TStringField;
+    qrWD4MF10AMF10016: TStringField;
+    qrWD4MF10AMF10017: TStringField;
+    qrWD4MF10AMF10018: TStringField;
+    qrWD4MF10AMF10019: TStringField;
+    qrWD4MF10AMF10020: TStringField;
+    qrWD4MF10AMF10021: TStringField;
+    qrWD4MF10AMF10022: TStringField;
+    qrWD4MF10AMF10023: TStringField;
+    qrWD4MF10AMF10024: TStringField;
+    qrWD4MF10AMF10025: TStringField;
+    qrWD4MF10AMF10026: TStringField;
+    qrWD4MF10AMF10027: TStringField;
+    qrWD4MF10AMF10028: TStringField;
+    qrWD4MF10AMF10029: TStringField;
+    qrWD4MF10AMF10030: TStringField;
+    qrWD4MF10AMF10031: TStringField;
+    qrWD4MF10AMF10032: TStringField;
+    qrWD4MF10AMF10033: TStringField;
+    qrWD4MF10AMF10034: TFloatField;
+    qrWD4MF10AMF10035: TStringField;
+    qrWD4MF10AMF10036: TStringField;
+    qrWD4MF10AMF10037: TStringField;
+    qrWD4MF10AMF10038: TStringField;
+    qrWD4MF10AMF10039: TStringField;
+    qrWD4MF10AMF10040: TStringField;
+    qrWD4MF10AMF10041: TStringField;
+    qrWD4MF10AMF10042: TStringField;
+    qrWD4MF10AMF10043: TStringField;
+    qrWD4MF10AMF10046: TStringField;
+    qrWD4MF10AMF10047: TStringField;
+    qrWD4MF10AMF10048: TStringField;
+    qrWD4MF10AMF10049: TFloatField;
+    qrWD4MF10AMF10050: TFloatField;
+    qrWD4MF10AMF10051: TFloatField;
+    qrWD4MF10AMF10052: TFloatField;
+    qrWD4MF10AMF10053: TFloatField;
+    qrWD4MF10AMF10054: TStringField;
+    qrWD4MF10AMF10055: TStringField;
+    qrWD4MF10AMF10056: TStringField;
+    qrWD4MF10AMF10057: TStringField;
+    qrWD4MF10AMF10058: TStringField;
+    qrWD4MF10AMF10044: TDateTimeField;
+    qrWD4MF10AMF10045: TDateTimeField;
+    qrWD4MF10AMF10059: TStringField;
+    qrWD4MF10AMF10060: TStringField;
+    qrWD4MF10AMF10061: TStringField;
+    qrWD4MF10AMF10062: TStringField;
+    qrWD4MF10AMF10063: TStringField;
+    qrWD4MF10AMF10064: TStringField;
+    qrWD4MF10AMF10065: TDateTimeField;
+    qrWD4MF10AMF10066: TDateTimeField;
+    qrWD4MF10AMF10067: TStringField;
+    qrWD4MF10AMF10068: TStringField;
+    qrWD4MF10AMF10069: TStringField;
+    qrWD4MF10AMF10070: TStringField;
+    qrWD4MF10AMF10071: TStringField;
+    qrWD4MF10AMF10072: TStringField;
+    qrWD4MF10AMF10073: TFloatField;
+    qrWD4MF10AMF10074: TStringField;
+    qrWD4MF10AMF10075: TStringField;
+    qrWD4MF10AMF10076: TStringField;
+    qrWD4MF10AMF10077: TStringField;
+    qrWD4MF10AMF10078: TFloatField;
+    qrWD4MF10AMF10079: TStringField;
+    qrWD4MF10AMF10080: TDateTimeField;
+    qrWD4MF10AMF10081: TDateTimeField;
+    qrWD4MF10AMF10082: TStringField;
+    qrWD4MF10AMF10083: TStringField;
+    qrWD4MF10AMF10084: TFloatField;
+    qrWD4MF10AMF10085: TFloatField;
+    qrWD4MF10AMF10086: TFloatField;
+    qrWD4MF10AMF10087: TFloatField;
+    qrWD4MF10AMF10801: TStringField;
+    qrWD4MF10AMF10802: TStringField;
+    qrWD4MF10AMF10803: TStringField;
+    qrWD4MF10AMF10804: TStringField;
+    qrWD4MF10AMF10805: TStringField;
+    qrWD4MF10AMF10806: TFloatField;
+    qrWD4MF10AMF10807: TFloatField;
+    qrWD4MF10AMF10808: TFloatField;
+    qrWD4MF10AMF10809: TDateTimeField;
+    qrWD4MF10AMF10810: TDateTimeField;
+    qrWD4MF10AMF10811: TFloatField;
+    qrWD4MF10AMF10812: TFloatField;
+    qrWD4MF10AMF10088: TStringField;
+    qrWD4MF10AMF10900: TStringField;
+    qrWD4MF10AMF10980: TBlobField;
+    qrWD4MF10AMF10982: TStringField;
+    qrWD4MF10AMF10983: TDateTimeField;
+    qrWD4MF10AMF10984: TStringField;
+    qrWD4MF10AMF10985: TDateTimeField;
+    qrWD4MF10AMF10986: TStringField;
+    qrWD4MF10AMF10987: TDateTimeField;
+    qrWD4MF10AMF10988: TStringField;
+    qrWD4MF10AMF10989: TDateTimeField;
+    qrWD4MF10AMF10821: TStringField;
+    qrWD4MF10AMF10822: TStringField;
+    qrWD4MF10AMF10089: TIntegerField;
+    qrWD4MF10AMF10090: TStringField;
+    qrWD4MF10AMF10091: TStringField;
+    qrWD4MF10AMF10092: TStringField;
+    qrWD4MF10AMF10093: TStringField;
+    qrWD4MF10AMF10094: TStringField;
+    qrWD4MF10AMF10095: TStringField;
+    qrWD4MF10AMF10096: TStringField;
+    qrWD4MF10AMF10097: TStringField;
+    qrWD4MF10AMF10098: TStringField;
+    qrWD4MF10AMF10099: TStringField;
+    qrWD4MF10AMF10100: TDateTimeField;
+    qrWD4MF10AMF10101: TStringField;
+    qrWD4MF10AMF10102: TStringField;
+    qrWD4MF10AMF10103: TIntegerField;
+    dsWD4DT10A: TDataSource;
+    qrWD4DT10A: TUniQuery;
+    qrWD4DT10ADT10001: TStringField;
+    qrWD4DT10ADT10002: TStringField;
+    qrWD4DT10ADT10003: TStringField;
+    qrWD4DT10ADT10004: TStringField;
+    qrWD4DT10ADT10005: TStringField;
+    qrWD4DT10ADT10006: TStringField;
+    qrWD4DT10ADT10007: TStringField;
+    qrWD4DT10ADT10008: TStringField;
+    qrWD4DT10ADT10009: TFloatField;
+    qrWD4DT10ADT10010: TFloatField;
+    qrWD4DT10ADT10011: TFloatField;
+    qrWD4DT10ADT10012: TFloatField;
+    qrWD4DT10ADT10013: TFloatField;
+    qrWD4DT10ADT10014: TStringField;
+    qrWD4DT10ADT10015: TStringField;
+    qrWD4DT10ADT10017: TStringField;
+    qrWD4DT10ADT10018: TStringField;
+    qrWD4DT10ADT10019: TStringField;
+    qrWD4DT10ADT10020: TStringField;
+    qrWD4DT10ADT10021: TStringField;
+    qrWD4DT10ADT10022: TFloatField;
+    qrWD4DT10ADT10023: TFloatField;
+    qrWD4DT10ADT10024: TFloatField;
+    qrWD4DT10ADT10025: TStringField;
+    qrWD4DT10ADT10026: TStringField;
+    qrWD4DT10ADT10027: TStringField;
+    qrWD4DT10ADT10028: TFloatField;
+    qrWD4DT10ADT10029: TStringField;
+    qrWD4DT10ADT10030: TFloatField;
+    qrWD4DT10ADT10031: TStringField;
+    qrWD4DT10ADT10033: TStringField;
+    qrWD4DT10ADT10034: TStringField;
+    qrWD4DT10ADT10035: TStringField;
+    qrWD4DT10ADT10036: TStringField;
+    qrWD4DT10ADT10037: TStringField;
+    qrWD4DT10ADT10038: TStringField;
+    qrWD4DT10ADT10039: TStringField;
+    qrWD4DT10ADT10040: TFloatField;
+    qrWD4DT10ADT10041: TFloatField;
+    qrWD4DT10ADT10042: TFloatField;
+    qrWD4DT10ADT10043: TFloatField;
+    qrWD4DT10ADT10044: TFloatField;
+    qrWD4DT10ADT10045: TFloatField;
+    qrWD4DT10ADT10046: TStringField;
+    qrWD4DT10ADT10047: TStringField;
+    qrWD4DT10ADT10048: TStringField;
+    qrWD4DT10ADT10049: TStringField;
+    qrWD4DT10ADT10050: TStringField;
+    qrWD4DT10ADT10051: TStringField;
+    qrWD4DT10ADT10052: TStringField;
+    qrWD4DT10ADT10053: TStringField;
+    qrWD4DT10ADT10054: TStringField;
+    qrWD4DT10ADT10055: TStringField;
+    qrWD4DT10ADT10056: TStringField;
+    qrWD4DT10ADT10057: TStringField;
+    qrWD4DT10ADT10058: TStringField;
+    qrWD4DT10ADT10059: TStringField;
+    qrWD4DT10ADT10060: TStringField;
+    qrWD4DT10ADT10061: TStringField;
+    qrWD4DT10ADT10062: TFloatField;
+    qrWD4DT10ADT10063: TStringField;
+    qrWD4DT10ADT10064: TStringField;
+    qrWD4DT10ADT10065: TStringField;
+    qrWD4DT10ADT10066: TStringField;
+    qrWD4DT10ADT10067: TStringField;
+    qrWD4DT10ADT10068: TStringField;
+    qrWD4DT10ADT10069: TFloatField;
+    qrWD4DT10ADT10070: TFloatField;
+    qrWD4DT10ADT10071: TFloatField;
+    qrWD4DT10ADT10072: TStringField;
+    qrWD4DT10ADT10073: TStringField;
+    qrWD4DT10ADT10074: TBlobField;
+    qrWD4DT10ADT10075: TFloatField;
+    qrWD4DT10ADT10076: TFloatField;
+    qrWD4DT10ADT10077: TFloatField;
+    qrWD4DT10ADT10078: TStringField;
+    qrWD4DT10ADT10079: TStringField;
+    qrWD4DT10ADT10080: TStringField;
+    qrWD4DT10ADT10081: TStringField;
+    qrWD4DT10ADT10082: TStringField;
+    qrWD4DT10ADT10083: TStringField;
+    qrWD4DT10ADT10084: TStringField;
+    qrWD4DT10ADT10085: TStringField;
+    qrWD4DT10ADT10086: TFloatField;
+    qrWD4DT10ADT10087: TFloatField;
+    qrWD4DT10ADT10088: TFloatField;
+    qrWD4DT10ADT10089: TStringField;
+    qrWD4DT10ADT10090: TStringField;
+    qrWD4DT10ADT10091: TStringField;
+    qrWD4DT10ADT10092: TStringField;
+    qrWD4DT10ADT10093: TStringField;
+    qrWD4DT10ADT10094: TStringField;
+    qrWD4DT10ADT10095: TStringField;
+    qrWD4DT10ADT10096: TStringField;
+    qrWD4DT10ADT10097: TStringField;
+    qrWD4DT10ADT10098: TStringField;
+    qrWD4DT10ADT10801: TStringField;
+    qrWD4DT10ADT10802: TStringField;
+    qrWD4DT10ADT10803: TStringField;
+    qrWD4DT10ADT10804: TStringField;
+    qrWD4DT10ADT10805: TStringField;
+    qrWD4DT10ADT10806: TFloatField;
+    qrWD4DT10ADT10807: TFloatField;
+    qrWD4DT10ADT10808: TFloatField;
+    qrWD4DT10ADT10809: TFloatField;
+    qrWD4DT10ADT10810: TFloatField;
+    qrWD4DT10ADT10811: TDateTimeField;
+    qrWD4DT10ADT10812: TDateTimeField;
+    qrWD4DT10ADT10900: TStringField;
+    qrWD4DT10ADT10099: TStringField;
+    qrWD4DT10ADT10016: TStringField;
+    qrWD4DT10ADT10032: TStringField;
+    qrWD4DT10ADT10100: TStringField;
+    qrWD4DT10ADT10101: TStringField;
+    qrWD4DT10ADT10102: TStringField;
+    qrWD4DT10ADT10103: TStringField;
+    qrWD4DT10ADT10601: TFloatField;
+    qrWD4DT10ADT10104: TStringField;
+    qrWD4DT10ADT10105: TStringField;
+    qrWD4MF10AMF10004: TFloatField;
+    qrWD2TITCTITC035: TFloatField;
+    qrWD2TITCTITC039: TStringField;
+    qrWD2TITCTITC042: TStringField;
+    qrWD2MFMU: TUniQuery;
+    dsWD2MFMU: TDataSource;
+    qrWD2MFMUMFMU001: TStringField;
+    qrWD2MFMUMFMU002: TStringField;
+    qrWD2MFMUMFMU003: TStringField;
+    qrWD2MFMUMFMU004: TStringField;
+    qrWD2MFMUMFMU005: TFloatField;
+    qrWD2MFMUMFMU008: TStringField;
+    qrWD2MFMUMFMU009: TStringField;
+    qrWD2MFMUMFMU014: TStringField;
+    qrWD2MFMUMFMU015: TFloatField;
+    qrWD2MFMUMFMU016: TFloatField;
+    qrWD2MFMUMFMU017: TFloatField;
+    qrWD2MFMUMFMU018: TFloatField;
+    qrWD2MFMUMFMU019: TFloatField;
+    qrWD2MFMUMFMU020: TStringField;
+    qrWD2MFMUMFMU021: TStringField;
+    qrWD2MFMUMFMU027: TStringField;
+    qrWD2MFMUMFMU028: TFloatField;
+    qrWD2DTMU: TUniQuery;
+    dsWD2DTMU: TDataSource;
+    qrWD2DTMUDTMU001: TStringField;
+    qrWD2DTMUDTMU002: TStringField;
+    qrWD2DTMUDTMU003: TStringField;
+    qrWD2DTMUDTMU004: TStringField;
+    qrWD2DTMUDTMU005: TStringField;
+    qrWD2DTMUDTMU006: TFloatField;
+    qrWD2DTMUDTMU007: TFloatField;
+    qrWD2DTMUDTMU008: TFloatField;
+    qrWD2DTMUDTMU009: TFloatField;
+    qrWD2DTMUDTMU010: TStringField;
+    qrWD2DTCU: TUniQuery;
+    dsWD2DTCU: TDataSource;
+    qrWD2DTCUDTCU001: TStringField;
+    qrWD2DTCUDTCU002: TStringField;
+    qrWD2DTCUDTCU003: TStringField;
+    qrWD2DTCUDTCU004: TStringField;
+    qrWD2DTCUDTCU005: TStringField;
+    qrWD2DTCUDTCU006: TStringField;
+    qrWD2DTCUDTCU007: TFloatField;
+    qrWD2DTCUDTCU008: TStringField;
+    qrWD2DTCUDTCU009: TStringField;
+    qrWD2DTCUDTCU010: TStringField;
+    qrWD2TITN: TUniQuery;
+    qrWD2TITNTITN001: TStringField;
+    qrWD2TITNTITN002: TStringField;
+    qrWD2TITNTITN003: TStringField;
+    qrWD2TITNTITN004: TStringField;
+    qrWD2TITNTITN005: TStringField;
+    qrWD2TITNTITN006: TStringField;
+    qrWD2TITNTITN007: TFloatField;
+    qrWD2TITNTITN008: TFloatField;
+    qrWD2TITNTITN009: TFloatField;
+    qrWD2TITNTITN010: TFloatField;
+    qrWD2TITNTITN011: TFloatField;
+    qrWD2TITNTITN012: TStringField;
+    qrWD2TITNTITN013: TStringField;
+    qrWD2TITNTITN014: TStringField;
+    qrWD2TITNTITN052: TFloatField;
+    qrWD2TITNTITN040: TStringField;
+    qrWD2TITNTITN035: TFloatField;
+    qrWD2TITNTITN039: TStringField;
+    qrWD2TITNTITN042: TStringField;
+    dsWD2TITN: TDataSource;
+    dsWD2CUST: TDataSource;
+    qrWD2CUST: TUniQuery;
+    qrWD2CUSTCUST001: TStringField;
+    qrWD2CUSTCUST002: TStringField;
+    qrWD2CUSTCUST003: TStringField;
+    qrWD2CUSTCUST004: TFloatField;
+    qrWD2CUSTCUST005: TStringField;
+    qrWD2CUSTCUST006: TStringField;
+    qrWD2CUSTCUST007: TStringField;
+    qrWD2CUSTCUST008: TStringField;
+    qrWD2CUSTCUST009: TFloatField;
+    qrWD2CUSTCUST010: TFloatField;
+    qrWD2CUSTCUST011: TFloatField;
+    qrWD2CUSTCUST012: TFloatField;
+    qrWD2CUSTCUST013: TFloatField;
+    qrWD2CUSTCUST014: TStringField;
+    qrWD2CUSTCUST015: TStringField;
+    qrWD2CUSTCUST016: TStringField;
+    qrWD2CUSTCUST017: TStringField;
+    qrWD2CUSTCUST018: TFloatField;
+    qrWD2CUSTCUST019: TStringField;
+    qrWD2CUSTCUST020: TStringField;
+    qrWD2CUSTCUST021: TStringField;
+    qrWD2CUSTCUST022: TStringField;
+    qrWD2CUSTCUST023: TFloatField;
+    qrWD2CUSTCUST024: TFloatField;
+    qrWD2CUSTCUST025: TStringField;
+    qrWD2CUSTCUST026: TStringField;
+    qrWD2CUSTCUST027: TStringField;
+    qrWD2CUSTCUST028: TStringField;
+    qrWD2CUSTCUST029: TFloatField;
+    qrWD2CUSTCUST030: TFloatField;
+    qrWD2CUSTCUST031: TStringField;
+    qrWD2CUSTCUST032: TStringField;
+    qrWD2CUSTCUST033: TFloatField;
+    qrWD2CUSTCUST034: TStringField;
+    qrWD2CUSTCUST035: TFloatField;
+    qrWD2CUSTCUST036: TStringField;
+    qrWD2CUSTCUST037: TFloatField;
+    qrWD2CUSTCUST038: TStringField;
+    qrWD2CUSTCUST039: TFloatField;
+    qrWD2CUSTCUST040: TStringField;
+    qrWD2CUSTCUST041: TFloatField;
+    qrWD2CUSTCUST042: TStringField;
+    qrWD2CUSTCUST043: TFloatField;
+    qrWD2CUSTCUST044: TStringField;
+    qrWD2CUSTCUST045: TFloatField;
+    qrWD2CUSTCUST046: TStringField;
+    qrWD2CUSTCUST047: TFloatField;
+    qrWD2CUSTCUST048: TStringField;
+    qrWD2CUSTCUST049: TStringField;
+    qrWD2CUSTCUST050: TFloatField;
+    qrWD2CUSTCUST051: TStringField;
+    qrWD2CUSTCUST052: TFloatField;
+    qrWD2CUSTCUST053: TFloatField;
+    qrWD2CUSTCUST054: TStringField;
+    qrWD2CUSTCUST055: TFloatField;
+    qrWD2CUSTCUST056: TStringField;
+    qrWD2CUSTCUST057: TStringField;
+    qrWD2CUSTCUST058: TStringField;
+    qrWD2CUSTCUST059: TStringField;
+    qrWD2CUSTCUST060: TStringField;
+    qrWD2CUSTCUST061: TStringField;
+    qrWD2CUSTCUST062: TStringField;
+    qrWD2CUSTCUST063: TStringField;
+    qrWD2CUSTCUST064: TStringField;
+    qrWD2CUSTCUST065: TStringField;
+    qrWD2CUSTCUST066: TStringField;
+    qrWD2CUSTCUST067: TStringField;
+    qrWD2CUSTCUST068: TStringField;
+    qrWD2CUSTCUST069: TStringField;
+    qrWD2CUSTCUST070: TFloatField;
+    qrWD2CUSTCUST071: TFloatField;
+    qrWD2CUSTCUST072: TFloatField;
+    qrWD2CUSTCUST073: TFloatField;
+    qrWD2CUSTCUST074: TFloatField;
+    qrWD2CUSTCUST075: TFloatField;
+    qrWD2CUSTCUST076: TStringField;
+    qrWD2CUSTCUST077: TStringField;
+    qrWD2CUSTCUST078: TStringField;
+    qrWD2CUSTCUST079: TStringField;
+    qrWD2CUSTCUST080: TStringField;
+    qrWD2CUSTCUST081: TStringField;
+    qrWD2CUSTCUST082: TStringField;
+    qrWD2CUSTCUST083: TStringField;
+    qrWD2CUSTCUST084: TStringField;
+    qrWD2CUSTCUST085: TStringField;
+    qrWD2CUSTCUST086: TStringField;
+    qrTraceLogWD2TITC: TUniQuery;
+    dsWD3CHAC01A: TDataSource;
+    dsTraceLog: TDataSource;
+    dsTraceLogWD2TITC: TDataSource;
+    qrTraceLogWD2TITCPK1: TStringField;
+    qrTraceLogWD2TITCPK2: TStringField;
+    qrTraceLogWD2TITCPK3: TStringField;
+    qrTraceLogWD2TITCPK4: TStringField;
+    qrTraceLogWD2TITCTITC043: TStringField;
+    qrTraceLogWD2TITCOP: TStringField;
+    qrTraceLogWD2TITCLOG_TIME: TDateTimeField;
+    qrTraceLogWD2TITCXFER: TIntegerField;
+    qrTraceLogLOG_TIME: TDateTimeField;
+    qrTraceLogOP: TStringField;
+    qrTraceLogPK: TStringField;
+    qrTraceLogREC_ID: TIntegerField;
+    qrTraceLogTABLE_NAME: TStringField;
+    qrTraceLogXFER: TIntegerField;
+    qrWD2SHIOSHIO016: TStringField;
+    qrWD2SHIOSHIO017: TStringField;
+    qrWD2SHIOSHIO018: TStringField;
+    qrWD2SHIOSHIO019: TStringField;
+    qrWD2SHIOSHIO020: TStringField;
+    qrWD2SHIOSHIO021: TStringField;
+    qrWD2SHIOSHIO022: TStringField;
+    qrWD2SHIOSHIO026: TStringField;
+    qrWD2SHIOSHIO027: TStringField;
+    qrWD2SHIOSHIO029: TStringField;
+    procedure DataModuleDestroy(Sender: TObject);
+    procedure qrWD4MF10AMF10004GetText(Sender: TField; var Text: string; DisplayText: Boolean);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure SetConnection(ABranch: string);
+    procedure GetTraceLog(ASQLType: Integer; AKey: string);
+    procedure GetTraceLogWD2TITC(ACustNo: string);
+  end;
+
+const
+  //ず北 IB IP
+  SVR_IB_Taipei     = '10.1.2.19';
+  SVR_IB_Taoyuan    = '10.3.1.20';
+  SVR_IB_Hsinchu    = '10.4.1.20';
+  SVR_IB_Taichung   = '10.5.1.20';
+  SVR_IB_Tainan     = '10.6.1.20';
+  SVR_IB_Kaohsiung  = '10.7.1.20';
+  SVR_IB_Winton_CN  = '10.1.2.21';
+  //ず北 IB DATABASE
+  DB_IB_Taichung    = '01';
+  DB_IB_Taipei      = '01';
+  DB_IB_Taoyuan     = '01';
+  DB_IB_Hsinchu     = '01';
+  DB_IB_Tainan      = '01';
+  DB_IB_Kaohsiung   = '01';
+  DB_IB_Winton_CN   = '123';
+
+var
+  dmIB: TdmIB;
+
+implementation
+
+{$R *.dfm}
+
+{ TdmIB }
+
+procedure TdmIB.DataModuleDestroy(Sender: TObject);
+begin
+  dmIB := nil;
+end;
+
+procedure TdmIB.GetTraceLog(ASQLType: Integer; AKey: string);
+begin
+  with qrTraceLog do
+  begin
+    if Active then Close;
+    SQL.Clear;
+    SQL.Add('SELECT * FROM TRACE_LOG');
+
+    if ASQLType = 1 then
+    begin
+      SQL.Add('WHERE PK=:PK');
+      Params.ParamValues['PK'] := AKey;
+    end
+    else if ASQLType = 2 then
+    begin
+      SQL.Add('WHERE TABLE_NAME=:TABLE_NAME');
+      Params.ParamValues['TABLE_NAME'] := AKey;
+    end
+    else
+      raise Exception.Create('Unknown SQL type, fail to PrepareSQL(IB)');
+    Open;
+  end;
+end;
+
+procedure TdmIB.GetTraceLogWD2TITC(ACustNo: string);
+begin
+  with qrTraceLogWD2TITC do
+  begin
+    if Active then Close;
+    SQL.Clear;
+    SQL.Add('SELECT * FROM TRACE_LOG_WD2TITC WITH(NOLOCK)');
+    AddWhere('(PK3 = :PK3)');
+    Params.ParamValues['PK3'] := ACustNo;
+    Open;
+  end;
+end;
+
+procedure TdmIB.qrWD4MF10AMF10004GetText(Sender: TField; var Text: string; DisplayText: Boolean);
+begin
+  Text := DateTimeToStr(FloatToDateTime(Sender.AsFloat));
+end;
+
+procedure TdmIB.SetConnection(ABranch: string);
+begin
+  with connMERP do
+  begin
+    if Connected then Connected := False;
+
+    if (ABranch = '') or (ABranch = 'ゅい') or (ABranch = 'APOS') or (ABranch = '代刚') then
+    begin
+      Server := SVR_IB_Taipei;
+      Database := DB_IB_Taipei;
+    end
+    else if (ABranch = 'い') then
+    begin
+      Server := SVR_IB_Taichung;
+      Database := DB_IB_Taichung;
+    end
+    else if (ABranch = '堕') then
+    begin
+      Server := SVR_IB_Taoyuan;
+      Database := DB_IB_Taoyuan;
+    end
+    else if (ABranch = '穝λ') then
+    begin
+      Server := SVR_IB_Hsinchu;
+      Database := DB_IB_Hsinchu;
+    end
+    else if (ABranch = '玭') then
+    begin
+      Server := SVR_IB_Tainan;
+      Database := DB_IB_Tainan;
+    end
+    else if (ABranch = '蔼动') then
+    begin
+      Server := SVR_IB_Kaohsiung;
+      Database := DB_IB_Kaohsiung;
+    end
+    else if (ABranch = 'ゅㄥ') then
+    begin
+      Server := SVR_IB_Winton_CN;
+      Database := DB_IB_Winton_CN;
+    end
+    else
+      raise Exception.Create('Unknown branch, fail to set IB connection');
+  end;
+end;
+
+end.
